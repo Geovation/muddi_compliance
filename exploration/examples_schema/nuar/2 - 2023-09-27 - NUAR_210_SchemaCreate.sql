@@ -1,3 +1,7 @@
+CREATE EXTENSION IF NOT EXISTS postgis
+    SCHEMA public
+    VERSION "3.3.1";
+
 DROP SCHEMA IF EXISTS nuarcodelists_datamanagement, nuarcodelists_platform, nuarcodelists_transformation, nuarcustombackdrop, nuardata, nuarorganisations, nuarsubmissions, nuarusercreateddata, nuarversion CASCADE;
 
 CREATE SCHEMA nuarcodelists_datamanagement;
