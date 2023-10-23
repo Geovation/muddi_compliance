@@ -62,3 +62,60 @@ INNER JOIN
         GROUP BY dno
     ) AS import 
     ON object.record_id = import.record_id;
+
+--SERVICE AREA (FULL NETWORK)
+WITH object AS (
+    INSERT INTO muddi.object (record_id, sf_geometry)
+    SELECT
+        md5(st_astext(st_extent(import.wkb_geometry))),
+        st_extent(import.wkb_geometry) 
+    FROM public."33kv_overhead_lines" AS import
+    RETURNING id, sf_geometry
+), space AS (
+    INSERT INTO muddi.space (object_id, extent)
+    SELECT
+        object.id,
+        object.sf_geometry
+    FROM object
+    RETURNING id
+)
+INSERT INTO muddi.service_area (asset_id, network_id)
+SELECT 
+    space.id,
+    network.id 
+FROM space, muddi.network as network
+where network.network_name = 'UKPN';
+
+--SERVICE AREA (SUBNETWORKS)
+WITH object AS (
+    INSERT INTO muddi.object (record_id, sf_geometry)
+    SELECT
+        md5(st_astext(st_extent(import.wkb_geometry))),
+        st_extent(import.wkb_geometry) 
+    FROM public."33kv_overhead_lines" AS import
+    GROUP BY import.dno
+    RETURNING id, sf_geometry
+), space AS (
+    INSERT INTO muddi.space (object_id, extent)
+    SELECT
+        object.id,
+        object.sf_geometry
+    FROM object
+    RETURNING id
+)
+INSERT INTO muddi.service_area (asset_id, network_id)
+SELECT 
+    space.id,
+    network.id 
+FROM space
+INNER JOIN object ON space.object_id = object.id
+INNER JOIN 
+    (
+        SELECT
+            md5(st_astext(st_extent(wkb_geometry))) AS record_id,
+            dno
+        FROM public."33kv_overhead_lines"
+        GROUP BY dno
+    ) AS import 
+    ON object.record_id = import.record_id
+INNER JOIN muddi.network as network on import.dno=network.network_name;
