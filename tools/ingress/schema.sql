@@ -1,12 +1,28 @@
 --SCHEMA CREATION
 CREATE SCHEMA muddi;
 
+CREATE TABLE muddi.organisations (
+    id uuid DEFAULT uuid_generate_v4(),
+    name varchar NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE muddi.data_sources (
+    id uuid DEFAULT uuid_generate_v4(),
+    name varchar NOT NULL, 
+    organisation_id uuid,
+    PRIMARY KEY (id), 
+    CONSTRAINT fk_muddi_data_source_organisation FOREIGN KEY (organisation_id) REFERENCES muddi.organisations (id)
+);
+
 CREATE TABLE muddi.object (
     id uuid DEFAULT uuid_generate_v4(),
     record_id varchar,
     sf_geometry geometry NOT NULL,
     system_id uuid DEFAULT uuid_generate_v4(),
-    PRIMARY KEY (id)
+    data_source_id uuid,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_muddi_object_data_source FOREIGN KEY (data_source_id) REFERENCES muddi.data_sources (id)
 );
 
 CREATE TABLE muddi.event (
@@ -39,11 +55,7 @@ CREATE TABLE muddi.action (
     CONSTRAINT fk_muddi_action_event FOREIGN KEY (event_id) REFERENCES muddi.event (id)
 );
 
-CREATE TABLE muddi.organisations (
-    id uuid DEFAULT uuid_generate_v4(),
-    name varchar NOT NULL,
-    PRIMARY KEY (id)
-);
+
 
 CREATE TABLE muddi.asset (
 	id uuid DEFAULT uuid_generate_v4(),
@@ -85,6 +97,7 @@ CREATE TABLE muddi.network_conveyance (
 CREATE TABLE muddi.network_node (
 	id uuid DEFAULT uuid_generate_v4(),
     network_conveyance_id uuid,
+    node_type varchar,
     PRIMARY KEY (id),
     CONSTRAINT fk_muddi_network_node_network_conveyance FOREIGN KEY (network_conveyance_id) REFERENCES muddi.network_conveyance (id)
 );
@@ -94,6 +107,8 @@ CREATE TABLE muddi.network_link (
     network_conveyance_id uuid,
     network_node_to_id uuid,
     network_node_from_id uuid,
+    conveyance_type varchar,
+    voltage varchar,
     PRIMARY KEY (id),
     CONSTRAINT fk_muddi_network_link_network_conveyance FOREIGN KEY (network_conveyance_id) REFERENCES muddi.network_conveyance (id),
     CONSTRAINT fk_muddi_network_link_network_node_to FOREIGN KEY (network_node_to_id) REFERENCES muddi.network_node (id),
@@ -220,3 +235,5 @@ CREATE TABLE muddi.service_area (
     CONSTRAINT fk_muddi_service_area_space FOREIGN KEY (space_id) REFERENCES muddi.space (id),
     CONSTRAINT fk_muddi_service_area_network FOREIGN KEY (network_id) REFERENCES muddi.network (id)
 );
+
+CREATE SCHEMA staging;

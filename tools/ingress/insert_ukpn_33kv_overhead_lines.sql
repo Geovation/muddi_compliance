@@ -3,13 +3,23 @@ INSERT INTO muddi.organisations (name)
 VALUES
 ('UK Power Networks');
 
+--DATA SOURCE
+INSERT INTO muddi.data_sources (name, organisation_id)
+SELECT
+    '33kv_overhead_lines',
+    organisations.id
+FROM muddi.organisations as organisations where organisations.name = 'UK Power Networks';
+
 --NETWORK
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry)
+    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
     SELECT
         md5(st_astext(st_collect(import.wkb_geometry))),
-        st_collect(import.wkb_geometry) 
-    FROM public."33kv_overhead_lines" AS import
+        st_collect(import.wkb_geometry) ,
+        source.id
+    FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
+    WHERE source.name = '33kv_overhead_lines'
+    GROUP BY source.id
     RETURNING id
 ), asset AS (
     INSERT INTO muddi.asset (object_id, asset_owner_id)
@@ -29,12 +39,14 @@ FROM asset;
 
 --SUBNETWORK
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry)
+    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
     SELECT
         md5(st_astext(st_collect(import.wkb_geometry))),
-        st_collect(import.wkb_geometry) 
-    FROM public."33kv_overhead_lines" AS import
-    GROUP BY import.dno
+        st_collect(import.wkb_geometry),
+        source.id 
+    FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
+    WHERE source.name = '33kv_overhead_lines'
+    GROUP BY import.dno, source.id
     RETURNING id, record_id
 ), asset AS (
     INSERT INTO muddi.asset (object_id, asset_owner_id)
@@ -65,12 +77,15 @@ INNER JOIN
 
 --SERVICE AREA (FULL NETWORK)
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry)
+    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
     SELECT
         md5(st_astext(st_extent(import.wkb_geometry))),
-        st_extent(import.wkb_geometry) 
-    FROM public."33kv_overhead_lines" AS import
-    RETURNING id, sf_geometry,
+        st_extent(import.wkb_geometry), 
+        source.id
+    FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
+    WHERE source.name = '33kv_overhead_lines'
+    GROUP BY source.id
+    RETURNING id, sf_geometry
 ), space AS (
     INSERT INTO muddi.space (object_id, extent)
     SELECT
@@ -79,7 +94,7 @@ WITH object AS (
     FROM object
     RETURNING id
 )
-INSERT INTO muddi.service_area (asset_id, network_id)
+INSERT INTO muddi.service_area (space_id, network_id)
 SELECT 
     space.id,
     network.id 
@@ -88,12 +103,14 @@ where network.network_name = 'UKPN';
 
 --SERVICE AREA (SUBNETWORKS)
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry)
+    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
     SELECT
         md5(st_astext(st_extent(import.wkb_geometry))),
-        st_extent(import.wkb_geometry) 
-    FROM public."33kv_overhead_lines" AS import
-    GROUP BY import.dno
+        st_extent(import.wkb_geometry),
+        source.id 
+    FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
+    WHERE source.name = '33kv_overhead_lines'
+    GROUP BY import.dno, source.id
     RETURNING id, sf_geometry, record_id
 ), space AS (
     INSERT INTO muddi.space (object_id, extent)
@@ -103,7 +120,7 @@ WITH object AS (
     FROM object
     RETURNING id, object_id
 )
-INSERT INTO muddi.service_area (asset_id, network_id)
+INSERT INTO muddi.service_area (space_id, network_id)
 SELECT 
     space.id,
     network.id 
@@ -132,7 +149,7 @@ FROM (
   SELECT 
   	dno,
     ST_StartPoint(wkb_geometry) AS geom, 
-    globalid AS leaving,
+    ogc_fid::varchar AS leaving,
     NULL::varchar AS entering
   FROM public."33kv_overhead_lines"
   UNION ALL
@@ -140,20 +157,21 @@ FROM (
   	dno,
     ST_EndPoint(wkb_geometry) AS geom, 
     NULL::varchar AS leaving,
-    globalid AS entering
+    ogc_fid::varchar AS entering
   FROM public."33kv_overhead_lines"
 ) as foo
-GROUP BY geom, networkid;
+GROUP BY geom, dno;
 
 --CREATE LINK TABLE
 CREATE TABLE staging.links AS
 SELECT
-    link.ocgfid:varchar AS record_id,
+    link.ogc_fid::varchar AS record_id,
     link.wkb_geometry AS geom,
+    link.dno as network_name,
     'cable' AS conveyance_type,
     link.betr_spann AS voltage,
-    node1.nodeid AS starting_node,
-    node2.nodeid AS ending_node
+    node1.nodeid::varchar AS starting_node,
+    node2.nodeid::varchar AS ending_node
 FROM public."33kv_overhead_lines" AS link
 INNER JOIN (
     SELECT 
@@ -161,24 +179,74 @@ INNER JOIN (
         leaving_link as linkid
     FROM staging.nodes
     CROSS JOIN UNNEST(nodes.leaving) AS leaving_link) as node1
-    ON link.globalid = node1.linkid 
+    ON link.ogc_fid::varchar = node1.linkid 
 INNER JOIN (
     SELECT 
         record_id AS nodeid,
         starting_link AS linkid
     FROM staging.nodes
     CROSS JOIN UNNEST(nodes.entering) AS starting_link) as node2
-    ON link.globalid = node2.linkid;
-
+    ON link.ogc_fid::varchar = node2.linkid;
 --INGEST NODES
 
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry)
+    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
     SELECT
         record_id,
-        geom
-    FROM staging.nodes AS import
+        geom,
+        source.id
+    FROM staging.nodes AS import, muddi.data_sources AS source
+    WHERE source.name = '33kv_overhead_lines'
     RETURNING id, record_id
+), asset AS (
+    INSERT INTO muddi.asset (object_id, asset_owner_id)
+    SELECT
+        object.id,
+        organisations.id
+    FROM object, muddi.organisations AS organisations
+    WHERE organisations.name = 'UK Power Networks'
+    RETURNING id, object_id
+), network_asset AS (
+    INSERT INTO muddi.network_asset (asset_id, utility_type)
+    SELECT 
+        asset.id,
+        'electricity'
+    FROM asset
+    RETURNING id, asset_id
+), network_conveyance AS (
+    INSERT INTO muddi.network_conveyance (network_asset_id, network_id)
+    SELECT
+        network_asset.id,
+        network.id
+    FROM network_asset
+    INNER JOIN asset ON network_asset.asset_id = asset.id
+    INNER JOIN object ON asset.object_id = object.id
+    INNER JOIN 
+    (
+        SELECT
+            record_id::varchar,
+            network_name
+        FROM staging.nodes
+    ) AS import 
+    ON object.record_id = import.record_id
+    INNER JOIN muddi.network as network on import.network_name=network.network_name
+    RETURNING id
+)   INSERT INTO muddi.network_node (network_conveyance_id, node_type)
+	SELECT
+        network_conveyance.id,
+        'Joint'
+    FROM network_conveyance;
+
+--INGEST LINKS
+WITH object AS (
+    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
+    SELECT
+        record_id,
+        geom,
+        source.id
+    FROM staging.links AS import, muddi.data_sources AS source
+    WHERE source.name = '33kv_overhead_lines'
+    RETURNING id, record_id, data_source_id
 ), asset AS (
     INSERT INTO muddi.asset (object_id, asset_owner_id)
     SELECT
@@ -207,13 +275,41 @@ WITH object AS (
         SELECT
             record_id,
             network_name
-        FROM staging.nodes
+        FROM staging.links
     ) AS import 
     ON object.record_id = import.record_id
     INNER JOIN muddi.network as network on import.network_name=network.network_name
-    RETURNING id
-)   INSERT INTO muddi.network_node (network_conveyance_id, node_type)
+    RETURNING id, network_asset_id
+)   INSERT INTO muddi.network_link (network_conveyance_id, conveyance_type, voltage, network_node_to_id, network_node_from_id)
 	SELECT
         network_conveyance.id,
-        'Joint'
-    FROM network_conveyance;
+        import.conveyance_type,
+        import.voltage,
+        end_network_node.id,
+        start_network_node.id
+    FROM network_conveyance
+    INNER JOIN network_asset on network_conveyance.network_asset_id = network_asset.id
+    INNER JOIN asset ON network_asset.asset_id = asset.id
+    INNER JOIN object ON asset.object_id = object.id
+    INNER JOIN 
+    (
+        SELECT
+            record_id,
+            conveyance_type,
+            voltage,
+            starting_node,
+            ending_node
+        FROM staging.links
+    ) AS import 
+    ON object.record_id = import.record_id
+    INNER JOIN muddi.object AS start_object ON import.starting_node = start_object.record_id  AND start_object.data_source_id = object.data_source_id
+    INNER JOIN muddi.asset AS start_asset ON start_object.id = start_asset.object_id
+    INNER JOIN muddi.network_asset AS start_network_asset ON start_asset.id = start_network_asset.asset_id
+    INNER JOIN muddi.network_conveyance AS start_network_conveyance ON start_network_asset.id = start_network_conveyance.network_asset_id
+    INNER JOIN muddi.network_node AS start_network_node ON start_network_conveyance.id = start_network_node.network_conveyance_id
+    INNER JOIN muddi.object AS end_object ON import.ending_node = end_object.record_id  AND start_object.data_source_id = object.data_source_id
+    INNER JOIN muddi.asset AS end_asset ON end_object.id = end_asset.object_id
+    INNER JOIN muddi.network_asset AS end_network_asset ON end_asset.id = end_network_asset.asset_id
+    INNER JOIN muddi.network_conveyance AS end_network_conveyance ON end_network_asset.id = end_network_conveyance.network_asset_id
+    INNER JOIN muddi.network_node AS end_network_node ON end_network_conveyance.id = end_network_node.network_conveyance_id
+  ;
