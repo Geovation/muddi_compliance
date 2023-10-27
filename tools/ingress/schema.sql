@@ -20,6 +20,7 @@ CREATE TABLE muddi.object (
     record_id varchar,
     sf_geometry geometry NOT NULL,
     system_id uuid DEFAULT uuid_generate_v4(),
+    feature_type varchar,
     data_source_id uuid,
     PRIMARY KEY (id),
     CONSTRAINT fk_muddi_object_data_source FOREIGN KEY (data_source_id) REFERENCES muddi.data_sources (id)
@@ -109,6 +110,9 @@ CREATE TABLE muddi.network_link (
     network_node_from_id uuid,
     conveyance_type varchar,
     voltage varchar,
+    material varchar,
+    diameter double precision,
+    diameter_units varchar,
     PRIMARY KEY (id),
     CONSTRAINT fk_muddi_network_link_network_conveyance FOREIGN KEY (network_conveyance_id) REFERENCES muddi.network_conveyance (id),
     CONSTRAINT fk_muddi_network_link_network_node_to FOREIGN KEY (network_node_to_id) REFERENCES muddi.network_node (id),
@@ -134,6 +138,7 @@ CREATE TABLE muddi.access (
 CREATE TABLE muddi.protection (
 	id uuid DEFAULT uuid_generate_v4(),
     network_accessory_id uuid,
+    protection_type varchar,
     PRIMARY KEY (id),
     CONSTRAINT fk_muddi_protection_network_accessory FOREIGN KEY (network_accessory_id) REFERENCES muddi.network_accessory (id)
 );
@@ -141,6 +146,11 @@ CREATE TABLE muddi.protection (
 CREATE TABLE muddi.container (
 	id uuid DEFAULT uuid_generate_v4(),
     network_accessory_id uuid,
+    container_type varchar,
+    material varchar,
+    diameter double precision,
+    diameter_units varchar,
+    sdr double precision,
     PRIMARY KEY (id),
     CONSTRAINT fk_muddi_container_network_accessory FOREIGN KEY (network_accessory_id) REFERENCES muddi.network_accessory (id)
 );

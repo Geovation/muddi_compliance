@@ -12,10 +12,11 @@ FROM muddi.organisations as organisations where organisations.name = 'UK Power N
 
 --NETWORK
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
+    INSERT INTO muddi.object (record_id, sf_geometry, feature_type, data_source_id)
     SELECT
         md5(st_astext(st_collect(import.wkb_geometry))),
-        st_collect(import.wkb_geometry) ,
+        st_collect(import.wkb_geometry),
+        'network',
         source.id
     FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
     WHERE source.name = '33kv_overhead_lines'
@@ -39,10 +40,11 @@ FROM asset;
 
 --SUBNETWORK
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
+    INSERT INTO muddi.object (record_id, sf_geometry, feature_type, data_source_id)
     SELECT
         md5(st_astext(st_collect(import.wkb_geometry))),
         st_collect(import.wkb_geometry),
+        'network',
         source.id 
     FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
     WHERE source.name = '33kv_overhead_lines'
@@ -77,10 +79,11 @@ INNER JOIN
 
 --SERVICE AREA (FULL NETWORK)
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
+    INSERT INTO muddi.object (record_id, sf_geometry, feature_type, data_source_id)
     SELECT
         md5(st_astext(st_extent(import.wkb_geometry))),
         st_extent(import.wkb_geometry), 
+        'service area',
         source.id
     FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
     WHERE source.name = '33kv_overhead_lines'
@@ -103,10 +106,11 @@ where network.network_name = 'UKPN';
 
 --SERVICE AREA (SUBNETWORKS)
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
+    INSERT INTO muddi.object (record_id, sf_geometry, feature_type, data_source_id)
     SELECT
         md5(st_astext(st_extent(import.wkb_geometry))),
         st_extent(import.wkb_geometry),
+        'service area',
         source.id 
     FROM public."33kv_overhead_lines" AS import, muddi.data_sources AS source
     WHERE source.name = '33kv_overhead_lines'
@@ -190,10 +194,11 @@ INNER JOIN (
 --INGEST NODES
 
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
+    INSERT INTO muddi.object (record_id, sf_geometry, feature_type, data_source_id)
     SELECT
         record_id,
         geom,
+        'node',
         source.id
     FROM staging.nodes AS import, muddi.data_sources AS source
     WHERE source.name = '33kv_overhead_lines'
@@ -239,10 +244,11 @@ WITH object AS (
 
 --INGEST LINKS
 WITH object AS (
-    INSERT INTO muddi.object (record_id, sf_geometry, data_source_id)
+    INSERT INTO muddi.object (record_id, sf_geometry, feature_type, data_source_id)
     SELECT
         record_id,
         geom,
+        'link',
         source.id
     FROM staging.links AS import, muddi.data_sources AS source
     WHERE source.name = '33kv_overhead_lines'
@@ -311,5 +317,8 @@ WITH object AS (
     INNER JOIN muddi.asset AS end_asset ON end_object.id = end_asset.object_id
     INNER JOIN muddi.network_asset AS end_network_asset ON end_asset.id = end_network_asset.asset_id
     INNER JOIN muddi.network_conveyance AS end_network_conveyance ON end_network_asset.id = end_network_conveyance.network_asset_id
-    INNER JOIN muddi.network_node AS end_network_node ON end_network_conveyance.id = end_network_node.network_conveyance_id
-  ;
+    INNER JOIN muddi.network_node AS end_network_node ON end_network_conveyance.id = end_network_node.network_conveyance_id;
+
+DROP TABLE staging.nodes;
+
+DROP TABLE staging.links;
