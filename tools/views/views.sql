@@ -9,7 +9,7 @@ SELECT
     network_link.voltage,
     network.network_name as network_name,
     organisations.name as asset_owner,
-    ST_Transform(object.sf_geometry, 4326)
+    ST_Transform(object.sf_geometry, 4326) as sf_geometry
 FROM muddi.object
 INNER JOIN muddi.asset on object.id = asset.object_id
 INNER JOIN muddi.network_asset on asset.id = network_asset.asset_id
@@ -26,7 +26,7 @@ SELECT
     network_node.node_type,
     network.network_name as network_name,
     organisations.name as asset_owner,
-    ST_Transform(object.sf_geometry, 4326)
+    ST_Transform(object.sf_geometry, 4326) as sf_geometry
 FROM muddi.object
 INNER JOIN muddi.asset on object.id = asset.object_id
 INNER JOIN muddi.network_asset on asset.id = network_asset.asset_id
@@ -48,7 +48,7 @@ SELECT
     END AS subnetwork,
     parent_network.network_name as parent_network_name,
     organisations.name as asset_owner,
-    ST_Transform(object.sf_geometry, 4326)
+    ST_Transform(object.sf_geometry, 4326) as sf_geometry
 FROM muddi.object
 INNER JOIN muddi.asset on object.id = asset.object_id
 INNER JOIN muddi.network on asset.id = network.asset_id
@@ -66,7 +66,7 @@ SELECT
     network_link.diameter_units,
     network.network_name as network_name,
     organisations.name as asset_owner,
-    ST_Transform(object.sf_geometry, 4326)
+    ST_Transform(object.sf_geometry, 4326) as sf_geometry
 FROM muddi.object
 INNER JOIN muddi.asset on object.id = asset.object_id
 INNER JOIN muddi.network_asset on asset.id = network_asset.asset_id
@@ -83,7 +83,7 @@ SELECT
     network_node.node_type,
     network.network_name as network_name,
     organisations.name as asset_owner,
-    ST_Transform(object.sf_geometry, 4326)
+    ST_Transform(object.sf_geometry, 4326) as sf_geometry
 FROM muddi.object
 INNER JOIN muddi.asset on object.id = asset.object_id
 INNER JOIN muddi.network_asset on asset.id = network_asset.asset_id
@@ -105,7 +105,7 @@ SELECT
     END AS subnetwork,
     parent_network.network_name as parent_network_name,
     organisations.name as asset_owner,
-    ST_Transform(object.sf_geometry, 4326)
+    ST_Transform(object.sf_geometry, 4326) as sf_geometry
 FROM muddi.object
 INNER JOIN muddi.asset on object.id = asset.object_id
 INNER JOIN muddi.network on asset.id = network.asset_id
