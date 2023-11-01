@@ -1,7 +1,7 @@
 {
     "$comment": "JSON Schema document created by ShapeChange - https://shapechange.net/",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://muddi.example.org/featurecollection.json",
+    "$id": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/featurecollection.json",
     "$defs": {
         "FeatureCollection": {
             "$anchor": "FeatureCollection",
@@ -36,7 +36,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Access"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Access"
                                             }
                                         }
                                     }
@@ -61,7 +61,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Container"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Container"
                                             }
                                         }
                                     }
@@ -86,7 +86,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIAsset"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIAsset"
                                             }
                                         }
                                     }
@@ -111,7 +111,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIEnvironmentUnit"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIEnvironmentUnit"
                                             }
                                         }
                                     }
@@ -136,7 +136,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIEvent"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIEvent"
                                             }
                                         }
                                     }
@@ -161,7 +161,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIObject"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIObject"
                                             }
                                         }
                                     }
@@ -186,7 +186,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDISpace"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDISpace"
                                             }
                                         }
                                     }
@@ -211,7 +211,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Network"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Network"
                                             }
                                         }
                                     }
@@ -236,7 +236,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkAsset"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkAsset"
                                             }
                                         }
                                     }
@@ -261,7 +261,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkConveyance"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkConveyance"
                                             }
                                         }
                                     }
@@ -286,7 +286,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkConveyanceLink"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkConveyanceLink"
                                             }
                                         }
                                     }
@@ -311,7 +311,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkConveyanceNode"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkConveyanceNode"
                                             }
                                         }
                                     }
@@ -336,7 +336,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NonUtilityObject"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NonUtilityObject"
                                             }
                                         }
                                     }
@@ -361,7 +361,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Observation"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Observation"
                                             }
                                         }
                                     }
@@ -386,7 +386,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/PhysicalProtection"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/PhysicalProtection"
                                             }
                                         }
                                     }
@@ -411,7 +411,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/PlanningArea"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/PlanningArea"
                                             }
                                         }
                                     }
@@ -436,7 +436,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Sensor"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Sensor"
                                             }
                                         }
                                     }
@@ -461,7 +461,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/ServiceArea"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/ServiceArea"
                                             }
                                         }
                                     }
@@ -486,7 +486,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Site"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Site"
                                             }
                                         }
                                     }
@@ -511,7 +511,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Structure"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Structure"
                                             }
                                         }
                                     }
@@ -536,7 +536,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Support"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Support"
                                             }
                                         }
                                     }
@@ -561,7 +561,7 @@
                                         "features": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/UnidentifiedBuriedObject"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/UnidentifiedBuriedObject"
                                             }
                                         }
                                     }
@@ -638,7 +638,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Access"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Access"
                                             }
                                         },
                                         {
@@ -653,7 +653,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Container"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Container"
                                             }
                                         },
                                         {
@@ -668,7 +668,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIAsset"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIAsset"
                                             }
                                         },
                                         {
@@ -683,7 +683,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIEnvironmentUnit"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIEnvironmentUnit"
                                             }
                                         },
                                         {
@@ -698,7 +698,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIEvent"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIEvent"
                                             }
                                         },
                                         {
@@ -713,7 +713,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDIObject"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDIObject"
                                             }
                                         },
                                         {
@@ -728,7 +728,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/MUDDISpace"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/MUDDISpace"
                                             }
                                         },
                                         {
@@ -743,7 +743,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Network"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Network"
                                             }
                                         },
                                         {
@@ -758,7 +758,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkAsset"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkAsset"
                                             }
                                         },
                                         {
@@ -773,7 +773,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkConveyance"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkConveyance"
                                             }
                                         },
                                         {
@@ -788,7 +788,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkConveyanceLink"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkConveyanceLink"
                                             }
                                         },
                                         {
@@ -803,7 +803,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NetworkConveyanceNode"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NetworkConveyanceNode"
                                             }
                                         },
                                         {
@@ -818,7 +818,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/NonUtilityObject"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/NonUtilityObject"
                                             }
                                         },
                                         {
@@ -833,7 +833,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Observation"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Observation"
                                             }
                                         },
                                         {
@@ -848,7 +848,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/PhysicalProtection"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/PhysicalProtection"
                                             }
                                         },
                                         {
@@ -863,7 +863,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/PlanningArea"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/PlanningArea"
                                             }
                                         },
                                         {
@@ -878,7 +878,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Sensor"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Sensor"
                                             }
                                         },
                                         {
@@ -893,7 +893,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/ServiceArea"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/ServiceArea"
                                             }
                                         },
                                         {
@@ -908,7 +908,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Site"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Site"
                                             }
                                         },
                                         {
@@ -923,7 +923,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Structure"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Structure"
                                             }
                                         },
                                         {
@@ -938,7 +938,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/Support"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/Support"
                                             }
                                         },
                                         {
@@ -953,7 +953,7 @@
                                                 }
                                             },
                                             "then": {
-                                                "$ref": "https://muddi.example.org/core.json#/$defs/UnidentifiedBuriedObject"
+                                                "$ref": "https://raw.githubusercontent.com/opengeospatial/developer-events/master/2023/Open-Standards-Code-Sprint/muddi/schemas/jsonfg_schema/TAGGED_VALUES/abc/core.json#/$defs/UnidentifiedBuriedObject"
                                             }
                                         },
                                         {

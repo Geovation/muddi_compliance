@@ -7,6 +7,7 @@
     "features": [
         {
             "type": "Feature",
+            "featureType": "NonUtilityObject",
             "id": 1,
             "geometry": null,
             "properties": {
@@ -14,9 +15,7 @@
                 "MATERIAL": "PE",
                 "DIAMETER": 63.0,
                 "NETWORKID": "66L1055",
-                "GLOBALID": "{0020B9BF-276D-4B35-9D60-D8C43FBA1778}"
-
-                
+                "GLOBALID": "{0020B9BF-276D-4B35-9D60-D8C43FBA1778}"                
             },
             "place": {
                 "type": "Point",
