@@ -1,6 +1,6 @@
 {
     "type": "FeatureCollection",
-    "numberReturned": 10,
+    "numberReturned": 1,
     "timeStamp": "2023-10-31T17:58:12Z",
     "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/27700",
     "geometryDimension": 0,
@@ -10,157 +10,19 @@
             "id": 1,
             "geometry": null,
             "properties": {
-                "name": "Sumburgh Airport"
+                "name": "urn:ogc:def:crs:OGC:1.3:CRS84",
+                "MATERIAL": "PE",
+                "DIAMETER": 63.0,
+                "NETWORKID": "66L1055",
+                "GLOBALID": "{0020B9BF-276D-4B35-9D60-D8C43FBA1778}"
+
+                
             },
             "place": {
                 "type": "Point",
                 "coordinates": [
                     439742.86,
                     1110569.17
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 2,
-            "geometry": null,
-            "properties": {
-                "name": "Tingwall Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    442034.65,
-                    1145510.23
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 3,
-            "geometry": null,
-            "properties": {
-                "name": "Kirkwall Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    348337.57,
-                    1008209.52
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 4,
-            "geometry": null,
-            "properties": {
-                "name": "Port-Adhair Steòrnabhaigh/Stornoway Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    145813.77,
-                    933187.02
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 5,
-            "geometry": null,
-            "properties": {
-                "name": "Wick John O'Groats Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    336260.39,
-                    952752.29
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 6,
-            "geometry": null,
-            "properties": {
-                "name": "Port-adhair Bheinn na Faoghla/Benbecula Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    78858.81,
-                    856476.20
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 7,
-            "geometry": null,
-            "properties": {
-                "name": "Port-adhair Bharraigh/Barra Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    69519.83,
-                    805904.99
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 8,
-            "geometry": null,
-            "properties": {
-                "name": "Inverness Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    277432.16,
-                    852187.46
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 9,
-            "geometry": null,
-            "properties": {
-                "name": "Aberdeen International Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    388011.12,
-                    812465.05
-                ]
-            },
-            "time": null
-        },
-        {
-            "type": "Feature",
-            "id": 10,
-            "geometry": null,
-            "properties": {
-                "name": "Tiree Airport"
-            },
-            "place": {
-                "type": "Point",
-                "coordinates": [
-                    100500.63,
-                    744969.33
                 ]
             },
             "time": null
