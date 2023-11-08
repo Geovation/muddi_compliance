@@ -26,6 +26,10 @@ CREATE TABLE muddi.object (
     CONSTRAINT fk_muddi_object_data_source FOREIGN KEY (data_source_id) REFERENCES muddi.data_sources (id)
 );
 
+CREATE INDEX muddi_object_sf_geometry_idx
+  ON muddi.object
+  USING GIST (sf_geometry);
+
 CREATE TABLE muddi.event (
 	id uuid DEFAULT uuid_generate_v4(),
     target_object uuid,
