@@ -251,3 +251,4 @@ CREATE TABLE muddi.service_area (
 );
 
 CREATE SCHEMA staging;
+
