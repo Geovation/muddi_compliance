@@ -1,0 +1,375 @@
+Table "muddi"."geotech_unit" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."chemical_unit" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."hydro_unit" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."geologic_unit" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."network" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "commodity_type" VARCHAR [note: 'Indicates the commodity being distributed']
+  "parent_network_id" UUID [note: 'Where feature is a subnetwork or subordinate network, id would be populated to indicate overarching containing network']
+  "network_type" VARCHAR [note: 'Used to indicate whether feature is a subnetwork or subordinate network']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."planning_area" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "extent" GEOMETRY [note: 'Bounding box geometry of geom']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."site" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "extent" GEOMETRY [note: 'Bounding box geometry of geom']
+  "network_id" UUID [note: 'Indicates a linked network feature']
+  "sub_network_id" UUID [note: 'Indicates a linked subnetwork feature']
+  "subordinate_network_id" UUID [note: 'Indicates a linked subordinate network feature']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."service_area" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "extent" GEOMETRY [note: 'Bounding box geometry of geom']
+  "network_id" UUID [note: 'Indicates a linked network feature']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."network_node" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "utility_type" VARCHAR [note: 'Indicates the type of utility it forms a part of or commodity that it distributes.']
+  "network_id" UUID [note: 'Indicates a linked network feature']
+  "sub_network_id" UUID [note: 'Indicates a linked subnetwork feature']
+  "subordinate_network_id" UUID [note: 'Indicates a linked subordinate network feature']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."network_link" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "utility_type" VARCHAR [note: 'Indicates the type of utility it forms a part of or commodity that it distributes.']
+  "network_node_to_id" UUID [note: 'Indicates the end node id of the link']
+  "network_node_from_id" UUID [note: 'Indicates the start node id of the link']
+  "network_id" UUID [note: 'Indicates a linked network feature']
+  "sub_network_id" UUID [note: 'Indicates a linked subnetwork feature']
+  "subordinate_network_id" UUID [note: 'Indicates a linked subordinate network feature']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."relationship_accessory" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "network_node_id" UUID [note: 'Indicates a linked network node feature']
+  "network_link_id" UUID [note: 'Indicates a linked network link feature']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."structure" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "role" VARCHAR [note: 'Indicates its role in the built environment such as basement']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."access" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "utility_type" VARCHAR [note: 'Indicates the type of utility it forms a part of or commodity that it distributes.']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."protection" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "utility_type" VARCHAR [note: 'Indicates the type of utility it forms a part of or commodity that it distributes.']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."container" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "utility_type" VARCHAR [note: 'Indicates the type of utility it forms a part of or commodity that it distributes.']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."support" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "utility_type" VARCHAR [note: 'Indicates the type of utility it forms a part of or commodity that it distributes.']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."sensor" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "asset_owner_id" VARCHAR [note: 'Name of the asset owner i.e. company or council']
+  "utility_type" VARCHAR [note: 'Indicates the type of utility it forms a part of or commodity that it distributes.']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."relationship_event" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "geotech_unit_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "chemical_unit_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "hydro_unit_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "geologic_unit_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "structure_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "access_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "protection_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "container_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "support_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "sensor_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "network_node_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "network_link_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "network_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "service_area_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "site_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+  "planning_area_id" UUID [note: 'Indicates linked feature(s) via the appropriate table named within column naming']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."observation" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+  "target_object" VARCHAR [note: 'Indicates the table where the relationship is expected, aids with selecting the appropriate id via column naming']
+  "target_property" VARCHAR [note: 'Indicates the property the event is being made for.']
+  "valid_time" TIMESTAMP [note: 'Event creation timestamp']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."denotation" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+  "target_object" VARCHAR [note: 'Indicates the table where the relationship is expected, aids with selecting the appropriate id via column naming']
+  "target_property" VARCHAR [note: 'Indicates the property the event is being made for.']
+  "valid_time" TIMESTAMP [note: 'Event creation timestamp']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Table "muddi"."action" {
+  "system_id" UUID [default: `uuid_generate_v4()`, note: 'Internally persistent id']
+  "record_id" VARCHAR [note: 'Persistent id from the data source']
+  "object_id" VARCHAR [note: 'Real world id']
+  "geom" GEOMETRY [not null, note: 'Used in place of conceptual sf_geometry']
+  "relationship_id" UUID [note: 'Indicates linked feature(s) via the appropriate relationship table']
+  "target_object" VARCHAR [note: 'Indicates the table where the relationship is expected, aids with selecting the appropriate id via column naming']
+  "target_property" VARCHAR [note: 'Indicates the property the event is being made for.']
+  "valid_time" TIMESTAMP [note: 'Event creation timestamp']
+
+Indexes {
+  system_id [pk]
+}
+}
+
+Ref "fk_muddi_network_parent_network":"muddi"."network"."system_id" < "muddi"."network"."parent_network_id"
+
+Ref "fk_muddi_site_network":"muddi"."network"."system_id" < "muddi"."site"."network_id"
+
+Ref "fk_muddi_site_sub_network":"muddi"."network"."system_id" < "muddi"."site"."sub_network_id"
+
+Ref "fk_muddi_site_subordinate_network":"muddi"."network"."system_id" < "muddi"."site"."subordinate_network_id"
+
+Ref "fk_muddi_service_area_network":"muddi"."network"."system_id" < "muddi"."service_area"."network_id"
+
+Ref "fk_muddi_network_link_network":"muddi"."network"."system_id" < "muddi"."network_node"."network_id"
+
+Ref "fk_muddi_network_link_sub_network":"muddi"."network"."system_id" < "muddi"."network_node"."sub_network_id"
+
+Ref "fk_muddi_network_link_subordinate_network":"muddi"."network"."system_id" < "muddi"."network_node"."subordinate_network_id"
+
+Ref "fk_muddi_network_link_network":"muddi"."network"."system_id" < "muddi"."network_link"."network_id"
+
+Ref "fk_muddi_network_link_sub_network":"muddi"."network"."system_id" < "muddi"."network_link"."sub_network_id"
+
+Ref "fk_muddi_network_link_subordinate_network":"muddi"."network"."system_id" < "muddi"."network_link"."subordinate_network_id"
+
+Ref "fk_muddi_network_link_node_to":"muddi"."network_node"."system_id" < "muddi"."network_link"."network_node_to_id"
+
+Ref "fk_muddi_network_link_node_from":"muddi"."network_node"."system_id" < "muddi"."network_link"."network_node_from_id"
+
+Ref "fk_muddi_relationship_accessory_network_node":"muddi"."network_node"."system_id" < "muddi"."relationship_accessory"."network_node_id"
+
+Ref "fk_muddi_relationship_accessory_network_link":"muddi"."network_link"."system_id" < "muddi"."relationship_accessory"."network_link_id"
+
+Ref "fk_muddi_structure_relationship_event":"muddi"."relationship_event"."system_id" < "muddi"."structure"."relationship_id"
+
+Ref "fk_muddi_access_relationship_event":"muddi"."relationship_accessory"."system_id" < "muddi"."access"."relationship_id"
+
+Ref "fk_muddi_protection_relationship_event":"muddi"."relationship_accessory"."system_id" < "muddi"."protection"."relationship_id"
+
+Ref "fk_muddi_sensor_container_event":"muddi"."relationship_accessory"."system_id" < "muddi"."container"."relationship_id"
+
+Ref "fk_muddi_support_relationship_event":"muddi"."relationship_accessory"."system_id" < "muddi"."support"."relationship_id"
+
+Ref "fk_muddi_sensor_relationship_event":"muddi"."relationship_accessory"."system_id" < "muddi"."sensor"."relationship_id"
+
+Ref "fk_muddi_relationship_event_geotech_unit":"muddi"."geotech_unit"."system_id" < "muddi"."relationship_event"."geotech_unit_id"
+
+Ref "fk_muddi_relationship_event_chemical_unit":"muddi"."chemical_unit"."system_id" < "muddi"."relationship_event"."chemical_unit_id"
+
+Ref "fk_muddi_relationship_event_hydro_unit":"muddi"."hydro_unit"."system_id" < "muddi"."relationship_event"."hydro_unit_id"
+
+Ref "fk_muddi_relationship_event_geologic_unit":"muddi"."geologic_unit"."system_id" < "muddi"."relationship_event"."geologic_unit_id"
+
+Ref "fk_muddi_relationship_event_access":"muddi"."access"."system_id" < "muddi"."relationship_event"."access_id"
+
+Ref "fk_muddi_relationship_event_protection":"muddi"."protection"."system_id" < "muddi"."relationship_event"."protection_id"
+
+Ref "fk_muddi_relationship_event_container":"muddi"."container"."system_id" < "muddi"."relationship_event"."container_id"
+
+Ref "fk_muddi_relationship_event_support":"muddi"."support"."system_id" < "muddi"."relationship_event"."support_id"
+
+Ref "fk_muddi_relationship_event_sensor":"muddi"."sensor"."system_id" < "muddi"."relationship_event"."sensor_id"
+
+Ref "fk_muddi_relationship_event_network_node":"muddi"."network_node"."system_id" < "muddi"."relationship_event"."network_node_id"
+
+Ref "fk_muddi_relationship_event_network_link":"muddi"."network_link"."system_id" < "muddi"."relationship_event"."network_link_id"
+
+Ref "fk_muddi_relationship_event_network":"muddi"."network"."system_id" < "muddi"."relationship_event"."network_id"
+
+Ref "fk_muddi_relationship_event_service_area":"muddi"."service_area"."system_id" < "muddi"."relationship_event"."service_area_id"
+
+Ref "fk_muddi_relationship_event_site":"muddi"."site"."system_id" < "muddi"."relationship_event"."site_id"
+
+Ref "fk_muddi_relationship_event_planning_area":"muddi"."planning_area"."system_id" < "muddi"."relationship_event"."planning_area_id"
+
+Ref "fk_muddi_relationship_event_structure":"muddi"."structure"."system_id" < "muddi"."relationship_event"."structure_id"
+
+Ref "fk_muddi_observation_relationship_event":"muddi"."relationship_event"."system_id" < "muddi"."observation"."relationship_id"
+
+Ref "fk_muddi_denotation_relationship_event":"muddi"."relationship_event"."system_id" < "muddi"."denotation"."relationship_id"
+
+Ref "fk_muddi_action_relationship_event":"muddi"."relationship_event"."system_id" < "muddi"."action"."relationship_id"
